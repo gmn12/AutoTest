@@ -1,0 +1,35 @@
+# 充值成功
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"mobilephone":"18066668888","amount":10000}
+  expect: {"status":1,"code":"10001","data":null,"msg":"充值成功"}
+
+# 手机号码格式不正确
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"mobilephone":"1806666888","amount":10000}
+  expect: {"status":0,"code":"20109","data":{},"msg":"手机号码格式不正确"}
+
+# 参数不能为空
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"amount":10000}
+  expect: {"status":0,"code":"20103","data":{},"msg":"参数错误：参数不能为空"}
+
+# 此手机号对应的会员不存在
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"mobilephone":"18066668890","amount":10000}
+  expect: {"status":0,"code":"20104","data":{},"msg":"此手机号对应的会员不存在"}
+
+# 请输入金额
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"mobilephone":"18066668890","amount":}
+  expect: {"status":0,"code":"20115","data":{},"msg":"请输入金额"}
+
+# 输入金额的金额小数不能超过两位
+- regdata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  logindata: {"mobilephone":"18066668888","pwd":"abcd_1"}
+  rechdata: {"mobilephone":"18066668890","amount":9890.789}
+  expect: {"status":0,"code":"20115","data":{},"msg":"输入金额的金额小数不能超过两位"}
